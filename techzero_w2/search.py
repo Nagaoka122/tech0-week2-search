@@ -34,15 +34,16 @@ def search_pages(query: str, pages: list) -> list:
     return results
 
 # ── 実際に動かしてみよう ──
-import json
-with open("pages.json", "r", encoding="utf-8") as f:
-    all_pages = json.load(f)
+if __name__ == "__main__":
+    import json
+    with open("pages.json", "r", encoding="utf-8") as f:
+        all_pages = json.load(f)
 
-hits = search_pages("DX", all_pages)
-print(f"'DX' の検索結果: {len(hits)} 件")
-print()
-for h in hits:
-    print(f"  ✅ {h['title']}  （{h['author']}）")
+    hits = search_pages("DX", all_pages)
+    print(f"'DX' の検索結果: {len(hits)} 件")
+    print()
+    for h in hits:
+        print(f"  ✅ {h['title']}  （{h['author']}）")
 
 
 
@@ -67,12 +68,13 @@ def highlight_match(text: str, query: str) -> str:
 
 
 # ── 動かしてみよう ──
-original = "大手メーカー勤務、DX推進担当として新規事業開発に従事"
-result1  = highlight_match(original, "DX")
-result2  = highlight_match(original, "dx")   # 小文字でもOK（IGNORECASE のおかげ）
+if __name__ == "__main__":
+    original = "大手メーカー勤務、DX推進担当として新規事業開発に従事"
+    result1  = highlight_match(original, "DX")
+    result2  = highlight_match(original, "dx")   # 小文字でもOK（IGNORECASE のおかげ）
 
-print("【変換前】")   ; print(" ", original)
-print("【変換後 DX】") ; print(" ", result1)
-print("【変換後 dx】") ; print(" ", result2)
-print()
-print("※ Streamlit画面では **DX** の部分が太字で表示されます")
+    print("【変換前】")   ; print(" ", original)
+    print("【変換後 DX】") ; print(" ", result1)
+    print("【変換後 dx】") ; print(" ", result2)
+    print()
+    print("※ Streamlit画面では **DX** の部分が太字で表示されます")
