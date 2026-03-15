@@ -1,20 +1,23 @@
 import streamlit as st
 import json
 from datetime import datetime
+from pathlib import Path
 from search import search_pages, highlight_match
 
-FEEDBACK_FILE = "feedback.json"
+BASE_DIR = Path(__file__).parent
+PAGES_FILE = BASE_DIR / "pages.json"
+FEEDBACK_FILE = BASE_DIR / "feedback.json"
 
 @st.cache_data
 def load_pages():
     try:
-        with open("pages.json", "r", encoding="utf-8") as f:
+        with open(PAGES_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except FileNotFoundError:
         return []
 
 def save_pages(pages):
-    with open("pages.json", "w", encoding="utf-8") as f:
+    with open(PAGES_FILE, "w", encoding="utf-8") as f:
         json.dump(pages, f, ensure_ascii=False, indent=2)
 
 def load_feedback():
